@@ -39,3 +39,9 @@ export function fetchCurrencies() {
     }
   };
 }
+
+export const SUBMIT_VALUES = 'SUBMIT_VALUES';
+export const submitValuesAction = (payload) => ({
+  type: SUBMIT_VALUES,
+  payload,
+});

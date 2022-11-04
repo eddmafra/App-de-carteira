@@ -1,6 +1,7 @@
 import { REQUEST_CURRENCIES,
   RESPONSE_CURRENCIES_SUCCESS,
-  RESPONSE_CURRENCIES_ERROR } from '../actions';
+  RESPONSE_CURRENCIES_ERROR,
+  SUBMIT_VALUES } from '../actions';
 
 export const INITIAL_STATE = {
   currencies: [], // array de string
@@ -25,6 +26,11 @@ function walletReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       error: action.error,
+    };
+  case SUBMIT_VALUES:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
     };
   default:
     return state;
