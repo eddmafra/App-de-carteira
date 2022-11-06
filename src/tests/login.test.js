@@ -26,7 +26,7 @@ describe('Tests <Login /> component', () => {
   });
 
   test('Verify redirection to "/carteira" by clicking button', async () => {
-    renderWithRouterAndRedux(<App />);
+    const { history } = renderWithRouterAndRedux(<App />);
 
     const emailInput = screen.getByTestId(/email-input/i);
     userEvent.type(emailInput, 'trybe@test.com');
@@ -36,5 +36,7 @@ describe('Tests <Login /> component', () => {
 
     const entrarBtn = screen.getByRole('button', { name: /entrar/i });
     userEvent.click(entrarBtn);
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/carteira');
   });
 });
