@@ -1,7 +1,7 @@
 import { REQUEST_CURRENCIES,
   RESPONSE_CURRENCIES_SUCCESS,
   RESPONSE_CURRENCIES_ERROR,
-  SUBMIT_VALUES } from '../actions';
+  SUBMIT_VALUES, DELETE_VALUES } from '../actions';
 
 export const INITIAL_STATE = {
   currencies: [], // array de string
@@ -31,6 +31,11 @@ function walletReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+    };
+  case DELETE_VALUES:
+    return {
+      ...state,
+      expenses: [...state.expenses.filter((e) => e.id !== +action.id)],
     };
   default:
     return state;

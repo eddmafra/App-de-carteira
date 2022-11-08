@@ -12,6 +12,7 @@ export default USER_LOGIN;
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const RESPONSE_CURRENCIES_SUCCESS = 'RESPONSE_CURRENCIES_SUCCESS';
 export const RESPONSE_CURRENCIES_ERROR = 'RESPONSE_CURRENCIES_ERROR';
+export const DELETE_VALUES = 'DELETE_VALUES';
 
 export const requestCurrencies = () => ({
   type: REQUEST_CURRENCIES,
@@ -44,4 +45,9 @@ export const SUBMIT_VALUES = 'SUBMIT_VALUES';
 export const submitValuesAction = (payload) => ({
   type: SUBMIT_VALUES,
   payload,
+});
+
+export const deleteValuesAction = (id) => ({
+  type: DELETE_VALUES,
+  id,
 });

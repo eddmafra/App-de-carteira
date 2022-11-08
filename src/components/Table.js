@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { deleteValuesAction } from '../redux/actions';
 
 class Table extends Component {
+  deleteValues = ({ target }) => {
+    const { id } = target;
+    const { dispatch } = this.props;
+    dispatch(deleteValuesAction(id));
+  };
+
   render() {
     const { expenses } = this.props;
-    console.log(this.props);
     return (
       <table>
         <thead>
@@ -23,8 +29,8 @@ class Table extends Component {
         </thead>
         <tbody>
           {expenses
-          && expenses.map((e, i) => (
-            <tr key={ i }>
+          && expenses.map((e) => (
+            <tr key={ e.id }>
               <td>{e.description }</td>
               <td>{e.tag}</td>
               <td>{e.method}</td>
@@ -33,6 +39,17 @@ class Table extends Component {
               <td>{(+e.exchangeRates[e.currency].ask).toFixed(2)}</td>
               <td>{(e.exchangeRates[e.currency].ask * e.value).toFixed(2)}</td>
               <td>Real</td>
+              <td>
+                <button type="button" data-testid="edit-btn">Editar despesa</button>
+                <button
+                  data-testid="delete-btn"
+                  id={ e.id }
+                  onClick={ this.deleteValues }
+                  type="button"
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -43,6 +60,7 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
